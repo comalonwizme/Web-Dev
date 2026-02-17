@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <h1>
+            ToDo List
+        </h1>
+    </header>
+    <main class="main_card">
+        <h1>
+            ToDo List
+        </h1>
+        <form id="todo_form" class="todo_class">
+            <input id="task_input" type="text" placeholder="New Task">
+            <button id="addBtn" class="btn" type="submit">Add</button>
+        </form>
+        <div class="meta">
+            <span class="pill">Total: <b id="total_cnt">0</b></span>
+            <span class="pill">Done: <b id="done_cnt">0</b></span>
+        </div>
+        <ul id="list" class="list">
+            <li id="empty_set" class="empty">
+                No tasks yet
+            </li>
+        </ul>
+    </main>
+    <script>
+    
+        const form = document.getElementById('todo_form');
+        const taskInput = document.getElementById('task_input');
+        const addBtn = document.getElementById('addBtn');
+        const list = document.getElementById('list');
+        const emptyState = document.getElementById('empty_set');
+        const totalCount = document.getElementById('total_cnt');
+        const doneCount = document.getElementById('done_cnt');
+
+        function updateUI() {
+            const items = list.querySelectorAll('li.item');
+            const doneItems = list.querySelectorAll('li.item.done');
+
+            totalCount.textContent = String(items.length);
+            doneCount.textContent = String(doneItems.length);
+
+            if (items.length === 0) {
+            emptyState.style.display = 'list-item'; // это <li>, не div
+            } else {
+            emptyState.style.display = 'none';
+            }
+
+            const value = taskInput.value.trim();
+            addBtn.disabled = value.length === 0;
+        }
+
+        function createItem(text) {
+            const li = document.createElement('li');
+            li.className = 'item';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'check';
+
+            const span = document.createElement('span');
+            span.className = 'text';
+            span.textContent = text;
+
+            const delBtn = document.createElement('button');
+            delBtn.type = 'button';
+            delBtn.className = 'del';
+            delBtn.textContent = 'Delete';
+
+            checkbox.addEventListener('change', function () {
+            li.classList.toggle('done', checkbox.checked);
+            updateUI();
+            });
+
+            delBtn.addEventListener('click', function () {
+            li.remove();
+            updateUI();
+            });
+
+            li.appendChild(checkbox);
+            li.appendChild(span);
+            li.appendChild(delBtn);
+
+            return li;
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const text = taskInput.value.trim();
+            if (text.length === 0) return updateUI();
+
+            list.appendChild(createItem(text));
+            taskInput.value = '';
+            taskInput.focus();
+            updateUI();
+        });
+
+        taskInput.addEventListener('input', updateUI);
+
+        updateUI();
+        taskInput.focus();
+    </script>
+
+</body>
+</html>
