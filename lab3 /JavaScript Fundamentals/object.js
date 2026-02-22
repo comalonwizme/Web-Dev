@@ -1,7 +1,7 @@
 'use strict'
 let user = {
-	name: "John";
-	surname: "Smith";
+	name: "John",
+	surname: "Smith"
 
 }
 
