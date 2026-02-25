@@ -1,0 +1,52 @@
+<main class="main-content">
+    <section class="welcome-hero">
+        <div class="welcome-wrapper">
+            <h1 class="welcome-title">
+                <span class="main-word">
+                    Welcome.
+                </span>
+                <span class="sub-word">
+                    The best way to buy the products you love
+                </span>
+                <span>.</span>
+            </h1>
+        </div>
+    </section>
+    <section class="store-grid">
+        <div class="store-text">
+            <h1 class="store-title">
+                <span class="store-word">
+                    Store
+                </span>
+            </h1>
+        </div>
+        <div class="products-container">
+            @for(x of myProducts; track x.id){
+                <div class="product-card">
+                    <div class="image-box">
+                        <img [src]="x.image" [alt]="x.name">
+                    </div>
+                    <div class="product-info">
+                        <span class="rating">
+                            ★ {{x.rating}}
+                        </span>
+                        <h3 class="product-title">
+                            {{x.name}}
+                        </h3>
+                        <p class="product-desc">
+                            {{x.description}}
+                        </p>
+                        <div class="product-footer">
+                            <span class="price">
+                                {{x.price}}
+                            </span>
+                            <a [href]="x.link" class="kaspi-btn" target="_blank">
+                                Buy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</main>

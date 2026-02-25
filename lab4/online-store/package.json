@@ -1,5 +1,5 @@
 {
-  "name": "task2",
+  "name": "online-store",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:task2": "node dist/task2/server/server.mjs"
+    "serve:ssr:online-store": "node dist/online-store/server/server.mjs"
   },
   "prettier": {
     "printWidth": 100,
