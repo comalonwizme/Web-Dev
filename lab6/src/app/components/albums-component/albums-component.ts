@@ -17,15 +17,17 @@ export class AlbumsComponent implements OnInit {
   loading = true;
   errorMessage = '';
 
-  constructor(private albumService: AlbumService, private cdr: ChangeDetectorRef) {}
+  constructor(private albumService: AlbumService, private cdr : ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadAlbums();
+    this.cdr.detectChanges();
   }
 
   loadAlbums(): void {
     this.loading = true;
     this.errorMessage = '';
+    this.cdr.detectChanges();
 
     this.albumService.getAlbums().subscribe({
       next: (data) => {
@@ -43,6 +45,7 @@ export class AlbumsComponent implements OnInit {
 
   deleteAlbum(id: number): void {
     this.errorMessage = '';
+    this.cdr.detectChanges();
 
     this.albumService.deleteAlbum(id).subscribe({
       next: () => {
