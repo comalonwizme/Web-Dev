@@ -13,6 +13,7 @@ export class Header {
     {label: 'AirPods', id: 2},
     {label: 'iPhone', id: 3},
     {label: 'Watch', id: 4},
-    {label: 'Camera', id: 5},
+    {label: 'Sort', id: 5},
   ]
+  
 }

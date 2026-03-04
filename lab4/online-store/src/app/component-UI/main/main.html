@@ -24,7 +24,9 @@
             @for(x of myProducts; track x.id){
                 <div class="product-card">
                     <div class="image-box">
-                        <img [src]="x.image" [alt]="x.name">
+                        <img [src]="x.images[0]" [alt]="x.name">
+                        <img [src]="x.images[1]" [alt]="x.name">
+                        <img [src]="x.images[2]" [alt]="x.name">
                     </div>
                     <div class="product-info">
                         <span class="rating">
