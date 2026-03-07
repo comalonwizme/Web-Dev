@@ -16,7 +16,7 @@ export class AlbumsComponent implements OnInit {
   albums: Album[] = [];
   loading = true;
   errorMessage = '';
-
+  deletedAlbums: number[] = [];
   constructor(private albumService: AlbumService, private cdr : ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class AlbumsComponent implements OnInit {
 
     this.albumService.getAlbums().subscribe({
       next: (data) => {
-        this.albums = data;
+        this.albums = data.filter(album => !this.deletedAlbums.includes(album.id));
         this.loading = false;
         this.cdr.detectChanges();
       },    
@@ -46,9 +46,9 @@ export class AlbumsComponent implements OnInit {
   deleteAlbum(id: number): void {
     this.errorMessage = '';
     this.cdr.detectChanges();
-
     this.albumService.deleteAlbum(id).subscribe({
       next: () => {
+        this.deletedAlbums.push(id);
         this.albums = this.albums.filter((album) => album.id !== id);
         this.cdr.detectChanges();
       },
